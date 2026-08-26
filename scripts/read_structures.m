@@ -1,4 +1,6 @@
-B= dicominfo('/Users/jamalzadehsaeed/Downloads/Nov 2025 desktop files/new cases/cases-dicoms/RS_anon_roi_nose_1_case_body_structure.dcm');
+% Read DICOM
+
+B= dicominfo('RS_anon_roi_nose_1_case_body_structure.dcm');
 % Load number of regions of interest
 roi = fieldnames(B.ROIContourSequence);
 nroi= size(roi,1);

@@ -1,32 +1,7 @@
 
 
 % Read DICOM
-A = dicominfo('.dcm');
-
-% -------------------------
-% Remove PHI
-% -------------------------
-A.PatientName                    = 'ANONYMIZED';
-A.PatientID                      = 'ANONYMIZED';
-A.PatientBirthDate               = '';
-A.PatientSex                     = '';
-A.StudyDate                      = '';
-A.StudyTime                      = '';
-A.AccessionNumber                = '';
-A.ReferringPhysicianName         = '';
-A.PerformingPhysicianName        = '';
-A.OperatorsName                  = '';
-A.InstitutionName                = '';
-A.InstitutionAddress             = '';
-A.InstitutionalDepartmentName    = '';
-A.StationName                    = '';
-A.StudyDescription               = '';
-A.SeriesDescription              = '';
-
-% Save anonymized DICOM
-outFile = '/Users/jamalzadehsaeed/Downloads/Nov 2025 desktop files/new cases/need0_anon.dcm';
-dicomwrite([], outFile, A, 'CreateMode', 'copy');
-fprintf('Anonymized DICOM saved to: %s\n', outFile);
+A = dicominfo('ear_needles.dcm');
 
 % -------------------------
 % Process needles
