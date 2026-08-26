@@ -30,19 +30,19 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 ## DICOM file content sample
 
 
+| Field | Meaning / use |
+| --- | --- |
+| `SOPClassUID` | Identifies the DICOM object class. Values correspond to RT Structure Set Storage or RT Plan Storage. |
+| `Modality` | Object modality: `RTSTRUCT` or `RTPLAN`. |
+| `Manufacturer` | Planning-system manufacturer metadata. |
+| `ManufacturerModelName` | Planning-system model metadata. |
+| `SoftwareVersions` | Planning-system software version. |
+| `SpecificCharacterSet` | Character encoding; `ISO_IR 100` in the reviewed files. |
+| `SOPInstanceUID` | Unique object identifier. Do not disclose unchanged UIDs in a public release. |
+| `FrameOfReferenceUID` | Spatial frame identifier. It must be consistent with the released image and structure objects. |
+| `PatientIdentityRemoved` | Standard de-identification declaration; must be populated by a validated release workflow. |
+| `DeidentificationMethod` | Documents the de-identification method; must be populated by a validated release workflow. |
 
-| Field | Present in | Meaning / use |
-| --- | --- | --- |
-| `SOPClassUID` | All files | Identifies the DICOM object class. Values correspond to RT Structure Set Storage or RT Plan Storage. |
-| `Modality` | All files | Object modality: `RTSTRUCT` or `RTPLAN`. |
-| `Manufacturer` | All files | Planning-system manufacturer metadata. |
-| `ManufacturerModelName` | All files | Planning-system model metadata. |
-| `SoftwareVersions` | All files | Planning-system software version. |
-| `SpecificCharacterSet` | All files | Character encoding; `ISO_IR 100` in the reviewed files. |
-| `SOPInstanceUID` | All files | Unique object identifier. Do not disclose unchanged UIDs in a public release. |
-| `FrameOfReferenceUID` | Plans / referenced structures | Spatial frame identifier. It must be consistent with the released image and structure objects. |
-| `PatientIdentityRemoved` | Not populated | Standard de-identification declaration; must be populated by a validated release workflow. |
-| `DeidentificationMethod` | Not populated | Documents the de-identification method; must be populated by a validated release workflow. |
 
 ### RT Structure Set fields
 
