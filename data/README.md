@@ -16,7 +16,7 @@ This README is a data descriptor for research and reproducibility.
 
 ### Intended source attribution
 
-The data were derived from retrospective HDR-BT cases managed through the Department of Radiation Oncology, University of Minnesota, as described in the associated manuscript. The manuscript's authors include contributors from the University of Minnesota Department of Industrial and Systems Engineering, the University of Minnesota Department of Radiation Oncology, and the University of Pittsburgh Department of Radiation Oncology.
+The data were derived from retrospective HDR-BT cases managed through the Department of Radiation Oncology, University of Minnesota, as described in the associated manuscript.
 
 
 ## Privacy, Governance, and Release Status
@@ -28,20 +28,6 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 
 
 ## DICOM file content sample
-
-
-| Field | Meaning / use |
-| --- | --- |
-| `SOPClassUID` | Identifies the DICOM object class. Values correspond to RT Structure Set Storage or RT Plan Storage. |
-| `Modality` | Object modality: `RTSTRUCT` or `RTPLAN`. |
-| `Manufacturer` | Planning-system manufacturer metadata. |
-| `ManufacturerModelName` | Planning-system model metadata. |
-| `SoftwareVersions` | Planning-system software version. |
-| `SpecificCharacterSet` | Character encoding; `ISO_IR 100` in the reviewed files. |
-| `SOPInstanceUID` | Unique object identifier. Do not disclose unchanged UIDs in a public release. |
-| `FrameOfReferenceUID` | Spatial frame identifier. It must be consistent with the released image and structure objects. |
-| `PatientIdentityRemoved` | Standard de-identification declaration; must be populated by a validated release workflow. |
-| `DeidentificationMethod` | Documents the de-identification method; must be populated by a validated release workflow. |
 
 
 ### RT Structure Set fields
@@ -65,7 +51,7 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 | --- | --- |
 | `RTPlanLabel` | Plan label. |
 | `RTPlanName` | Optional plan name. |
-| `ApprovalStatus` | Workflow status. It is not evidence that a plan is clinically approved for use. |
+| `ApprovalStatus` | Workflow status.|
 | `RTPlanGeometry` | Whether plan geometry is patient-based. |
 | `DoseReferenceSequence` | Dose-reference constraints and/or points. |
 | `DoseReferenceType` | Dose-reference category, such as target or organ at risk. |
@@ -76,8 +62,8 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 | `ApplicationSetupType` | Setup type as encoded by the planning system. |
 | `ChannelSequence` | One item per brachytherapy channel/needle. |
 | `ChannelNumber` | Channel identifier within the application setup. |
-| `ChannelLength` | Encoded channel length. Confirm the vendor's units and semantics before analysis. |
+| `ChannelLength` | Encoded channel length.|
 | `BrachyControlPointSequence` | Dwell/control-point positions and timing information. |
-| `ChannelTotalTime` | Encoded total channel time. Confirm units and delivery semantics before analysis. |
+| `ChannelTotalTime` | Encoded total channel time. |
 | `FractionGroupSequence` | Fractionation and application-setup counts. |
 | `SourceSequence` | Source isotope and source-strength metadata. |
