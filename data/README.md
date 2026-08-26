@@ -31,21 +31,6 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 
 
 
-| Case label inferred from filename | Recommended filename | SOP class / modality | Size (bytes) | SHA-256 |
-| --- | --- | --- | ---: | --- |
-| Ear Case | `RS_anon_roi_ear_case_body_structure.dcm` | RT Structure Set Storage / `RTSTRUCT` | 142,364 | `a28146654d8764426a6733c792f1902ee8165539dd4853cb634bc6a869800820` |
-| Nasal Case 1 | `nose1_needles.dcm` | RT Plan Storage / `RTPLAN` | 10,826 | `e8221010837a4bf55f12b06e9ff3a4a400182448e295156cc74888dd1f84a6bb` |
-| Nasal Case 1 | `RS_anon_roi_nose_1_case_body_structure.dcm` | RT Structure Set Storage / `RTSTRUCT` | 84,870 | `aa626a43c31f0ce5bb8162abba5346439f3c0ce4afcc075f693c0d2d3f325dda` |
-| Nasal Case 2 | `RS_anon_roi_nose_2_case_body_structure.dcm` | RT Structure Set Storage / `RTSTRUCT` | 143,296 | `687403754043d14b55cc85b240e0c12e45ea96bc7a540b7e25ebef6ded9183ac` |
-| Nasal Case 2 | `nose_2_needles.dcm` | RT Plan Storage / `RTPLAN` | 7,920 | `b3d263cc88090b4891e3f9dc057074ce8601f04710548b9806f28d1df94533e4` |
-| Ear Case | `ear_needles.dcm` | RT Plan Storage / `RTPLAN` | 7,462 | `d0327dcb8040aca99eadcba003384798a3d0b76866a82f317cbe3713fa69f5b4` |
-
-All six inspected files use Explicit VR Little Endian transfer syntax and `ISO_IR 100` character encoding. The producer metadata identifies Nucletron Oncentra; this is file provenance metadata, not a statement of clinical-system validation.
-
-## Data Dictionary
-
-### Common DICOM fields
-
 | Field | Present in | Meaning / use |
 | --- | --- | --- |
 | `SOPClassUID` | All files | Identifies the DICOM object class. Values correspond to RT Structure Set Storage or RT Plan Storage. |
