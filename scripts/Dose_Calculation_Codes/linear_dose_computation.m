@@ -1,9 +1,9 @@
 
-filename = 'RAW_DATA/nose_case_1_voxels.xlsx';
+filename = 'RAW_DATA/body_voxels.xlsx';
 sheet = 1;
 
-% to make sure all of the points are in positive axis ranges we added the
-% following constant values 
+% to make sure all of the points are in positive axis ranges you may need to adjust the
+% x-y-z coodinates 
 voxelCoordinates = xlsread(filename,sheet,'A:C');
 voxelCoordinates(:,1) = voxelCoordinates(:,1) + 81;
 voxelCoordinates(:,2) = voxelCoordinates(:,2) + 93;
@@ -56,7 +56,7 @@ maximumDoseByVoxel(voxelIndex,:) = max(doseByVoxelAndNeedle(voxelIndex,:));
 end
 
 
-filename = 'RAW_DATA/dose_received_by_voxels_nose_case_1.csv'
+filename = './dose_received_by_voxels.csv'
 xlswrite(filename,doseByVoxelAndNeedle);
 
 
