@@ -25,11 +25,7 @@ separate Julia implementation for constrained line clustering.
 | `scripts/Dose_calculation_codes/` | MATLAB code that creates dwell positions and calculates line-source or point-source doses. |
 | `results/` | Location for generated figures and tables. |
 
-The cleaned Julia clustering code is delivered separately at:
 
-```text
-/Users/jamalzadehsaeed/Downloads/kmeans_clean
-```
 
 It is intentionally separate from this MATLAB repository and contains all of
 its required Julia files and CSV inputs in one folder.
@@ -77,16 +73,6 @@ repository also uses `xlsread`, `xlswrite`, `csvread`, and `csvwrite`. These
 legacy functions remain in many MATLAB releases; if a current release warns
 about them, the existing scripts may still be used as written.
 
-To start MATLAB in this repository:
-
-```matlab
-cd('/Users/jamalzadehsaeed/Documents/GitHub/2024.0979.1')
-addpath(genpath(pwd))
-savepath
-```
-
-`savepath` is optional. It retains the repository on the MATLAB search path
-for future sessions.
 
 ### Julia, Gurobi
 
@@ -156,7 +142,7 @@ For example, change its `dicominfo` input to the selected case:
 
 ```matlab
 B = dicominfo(fullfile( ...
-    '/Users/jamalzadehsaeed/Documents/GitHub/2024.0979.1', ...
+    'GitHub/2024.0979', ...
     'data', 'DICOM_FILES', 'RS_anon_roi_nose_1_case_body_structure.dcm'));
 ```
 
@@ -208,7 +194,7 @@ Run it from the intended output folder so its relative CSV paths are written
 there:
 
 ```matlab
-cd('/Users/jamalzadehsaeed/Documents/GitHub/2024.0979.1/data/RAW DATA ')
+cd('GitHub/2024.0979/data/RAW DATA ')
 run('../../scripts/Dose_calculation_codes/dwell_position_creation.m')
 ```
 
