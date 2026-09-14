@@ -40,308 +40,195 @@ Use the following BibTeX entries:
 
 ## Description
 
-The research considers placement of straight treatment channels in
-patient-specific, 3D-printed surface masks for high-dose-rate brachytherapy
-(HDR-BT) of superficial skin cancer. It includes:
+This repository contains research implementations for placing straight
+treatment channels in patient-specific, 3D-printed surface masks for
+high-dose-rate brachytherapy (HDR-BT) of superficial skin cancer. The
+repository includes:
 
-- MATLAB scripts for DICOM-RT geometry, contour visualization, voxelization,
-  dwell-position generation, and dose-rate calculations;
-- Julia/Gurobi models for fixed-needle selection, free-needle phase 1, and
-  maximum coverage;
-- Julia/Gurobi variants for clustering 3-D points into constrained
-  infinite lines or finite line segments; and
-- anonymized example data and manuscript result figures for nasal and ear
-  cases.
+- MATLAB code for DICOM-RT geometry, contour visualization, voxelization,
+  dwell-position creation, and dose calculations;
+- Julia/Gurobi formulations for fixed-needle selection, free-needle phase 1,
+  and maximum coverage; and
+- Julia/Gurobi variants for clustering three-dimensional points into
+  constrained infinite lines or finite line segments.
 
-This is research and reproducibility code, **not clinical treatment-planning
-software**.
+This is research and reproducibility code, **not clinical
+treatment-planning software**. Do not use it for patient care.
 
 ## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `data/DICOM_FILES/` | Anonymized DICOM-RT structure sets and needle plans for two nasal cases and one ear case. |
-| `data/RAW DATA /` | MATLAB voxel, dwell-point, and source-endpoint inputs. |
+| `data/DICOM_FILES/` | Sample anonymized DICOM-RT structure sets and needle plans. |
+| `data/RAW DATA /` | Sample voxel, dwell-point, and source-endpoint data. |
 | `data/README.md` | DICOM data description, anonymization, governance, and source attribution. |
-| `scripts/DICOM_files_reader/` | MATLAB DICOM-RT structure and needle readers. |
-| `scripts/Body_organs_redear_codes/` | MATLAB contour, slice, volume, and voxelization helpers. |
-| `scripts/Polyhydron_generation/` | MATLAB convex-polyhedron generation from dwell points. |
-| `scripts/Dose_calculation_codes/` | MATLAB dwell-position generation and dose calculations. |
-| `scripts/Math_Methods/` | Julia optimization models and constrained clustering variants. |
-| `results/figures/` | Tracked figures for the nasal and ear cases and clustering variants. |
-| `results/tables/` | Tracked dose-metric and solution-time result tables. |
+| `scripts/DICOM_files_reader/` | DICOM-RT structure and needle scripts. |
+| `scripts/Body_organs_redear_codes/` | Contour, slice, volume, and voxelization helpers. |
+| `scripts/Polyhydron_generation/` | Convex-polyhedron construction from dwell points. |
+| `scripts/Dose_calculation_codes/` | Dwell-position and dose-calculation scripts. |
+| `scripts/Math_Methods/` | Optimization formulations and constrained clustering variants. |
 | `AUTHORS` | Project authors and contact information. |
 | `LICENSE` | MIT License text. |
 
-The `output/` directories below the Julia method folders are intentionally
-ignored by Git. They are created or populated when a model is run.
+## Sample data and replacement requirement
 
-## Data
+All data files supplied with this repository are **sample research inputs**.
+They illustrate the required file organization and data shapes for the
+included examples. For a different desired case, replace the applicable
+sample input file with your own data and update the corresponding
+case-specific parameters, ranges, or filenames in the relevant script.
 
-### DICOM-RT examples
+Replacement data must preserve the format expected by the selected method.
+In particular, retain the required number of coordinate columns, matrix
+orientation, compatible row and column counts, and valid index ranges.
 
-`data/DICOM_FILES/` contains three anonymized RT structure sets and three
-anonymized needle plans:
+### Sample DICOM-RT data
 
-| Clinical example | RT structure set | RT plan / needle file |
+`data/DICOM_FILES/` provides sample anonymized DICOM-RT files for one ear
+case and two nasal cases:
+
+| Sample case | Structure set | Needle plan |
 | --- | --- | --- |
-| Ear case | `RS_anon_roi_ear_case_body_structure.dcm` | `ear_needles.dcm` |
-| Nasal case 1 | `RS_anon_roi_nose_1_case_body_structure.dcm` | `nose1_needles.dcm` |
-| Nasal case 2 | `RS_anon_roi_nose_2_case_body_structure.dcm` | `nose_2_needles.dcm` |
+| Ear | `RS_anon_roi_ear_case_body_structure.dcm` | `ear_needles.dcm` |
+| Nasal 1 | `RS_anon_roi_nose_1_case_body_structure.dcm` | `nose1_needles.dcm` |
+| Nasal 2 | `RS_anon_roi_nose_2_case_body_structure.dcm` | `nose_2_needles.dcm` |
 
-Read `data/README.md` before using the DICOM files. It documents the
-anonymization process, removal or transformation of identifiers and metadata,
-and intended research-only use.
+Replace the selected structure-set and needle-plan sample files with the
+anonymized files for your desired case. Consult `data/README.md` for the
+anonymization, governance, and research-use conditions that apply to the
+provided examples.
 
-### MATLAB raw inputs
+### Sample MATLAB data
 
-The `data/RAW DATA /` directory contains:
+`data/RAW DATA /` provides the following sample inputs:
 
-| File | Purpose |
-| --- | --- |
-| `Selected_dwell_points.xlsx` | Three-dimensional selected dwell locations used by the polyhedron and point-source-dose scripts. |
-| `body_voxels.xlsx` | Three-dimensional voxel locations used by the line-source dose script. |
-| `start_point_directions_on_needles.csv` | One active-source start point per dwell position. |
-| `end_point_directions_on_needles.csv` | One active-source end point per dwell position. |
+| Sample file | Expected contents | Replace for a desired case |
+| --- | --- | --- |
+| `Selected_dwell_points.xlsx` | Three-dimensional selected dwell-point coordinates. | Replace with the desired dwell-point coordinate workbook. |
+| `body_voxels.xlsx` | Three-dimensional body-voxel coordinates. | Replace with the desired voxel coordinate workbook. |
+| `start_point_directions_on_needles.csv` | One active-source start point per dwell position. | Replace with source start points matching the desired dwell positions. |
+| `end_point_directions_on_needles.csv` | One active-source end point per dwell position. | Replace with source end points matching the desired dwell positions. |
 
-`dwell_position_creation.m` can generate the start/end source-point CSVs,
-middle-point CSV, and needle-number CSV from its embedded needle endpoints.
+Use matching coordinate units and dimensions across any dwell-point,
+source-endpoint, and voxel files used together.
 
-### Julia optimization inputs
+### Sample Julia optimization data
 
-Each Julia model stores its inputs in its own `data/` directory. Do not mix
-inputs between models unless the dimensions and parameter files have been
-updated accordingly.
+Every Julia formulation has a method-specific `data/` directory. The files in
+those directories are samples and must be replaced by compatible inputs for a
+new desired case.
 
-| Method | Input files |
-| --- | --- |
-| Fixed needle | `dose_matrix.csv`, `dwell_to_needle.csv`, `incompatible_needles.csv` |
-| Free needle phase 1 | `dose_matrix.csv` |
-| Maximum coverage | `candidate_needle_coverage.csv`, `candidate_needle_coverage_weights.csv`, `candidate_needle_intersections.csv` |
-| Clustering variants | `input_points.csv`, `constraint_normals.csv`, `constraint_offsets.csv`, `constraint_signs.csv` |
+| Method family | Sample input files | Replacement requirement |
+| --- | --- | --- |
+| Fixed needle | `dose_matrix.csv`, `dwell_to_needle.csv`, `incompatible_needles.csv` | Replace all three with compatible dose, dwell-to-needle, and incompatibility data. |
+| Free needle phase 1 | `dose_matrix.csv` | Replace with a voxel-by-dwell-position dose-rate matrix. |
+| Maximum coverage | `candidate_needle_coverage.csv`, `candidate_needle_coverage_weights.csv`, `candidate_needle_intersections.csv` | Replace all matrices for the desired candidate-needle set. |
+| Clustering variants | `input_points.csv`, `constraint_normals.csv`, `constraint_offsets.csv`, `constraint_signs.csv` | Replace all point and constraint files together for the desired geometry. |
 
-## Software requirements
+Do not combine samples from different method folders without also checking
+the associated parameter definitions and matrix dimensions.
 
-### MATLAB
+## MATLAB components
 
-Use a current desktop MATLAB release. The DICOM, plotting, numerical, Excel,
-and file I/O functions used by the MATLAB scripts require MATLAB and an
-installation with DICOM support. The polyhedron script also uses the Symbolic
-Math Toolbox.
+### DICOM structure reader
 
-Install MATLAB from <https://www.mathworks.com/downloads/>, then confirm
-available products from the MATLAB Command Window:
+`scripts/DICOM_files_reader/read_structures.m` processes the configured RT
+structure set, iterates through region-of-interest contour sequences, and
+visualizes the contour coordinates in three dimensions. Replace the
+configured sample DICOM structure-set filename with the anonymized structure
+set for the desired case.
 
-```matlab
-ver
-which dicominfo
-which syms
-```
+### Needle and dwell-position scripts
 
-The scripts use functions including `dicominfo`, `xlsread`, `xlswrite`,
-`csvread`, and `csvwrite`. The latter three are legacy MATLAB APIs and may
-produce compatibility warnings in newer releases.
+`scripts/DICOM_files_reader/read_needles.m` contains sample needle endpoints
+and derives dwell positions at 0.1 cm intervals along each needle. Replace
+the embedded endpoint sample with the desired needle geometry.
 
-### Julia and Gurobi
+`scripts/Dose_calculation_codes/dwell_position_creation.m` processes the
+configured sample needle-plan DICOM file, extracts brachytherapy control
+points, estimates needle directions, and derives source endpoints. Replace
+the configured sample DICOM filename with the needle plan for the desired
+case.
 
-The Julia optimization models require:
+### Body-structure and voxel helpers
 
-- Julia;
-- Gurobi and a valid Gurobi license;
-- the Julia packages `CSV`, `DataFrames`, `DelimitedFiles`, `Gurobi`, `JuMP`,
-  `LinearAlgebra`, and `Random`.
-
-Install Julia from <https://julialang.org/downloads/> and Gurobi from
-<https://www.gurobi.com/downloads/>. After activating the Gurobi license, run
-the following once from a Julia session:
-
-```julia
-using Pkg
-Pkg.add([
-    "CSV",
-    "DataFrames",
-    "DelimitedFiles",
-    "Gurobi",
-    "JuMP",
-    "LinearAlgebra",
-    "Random",
-])
-```
-
-Confirm that the solver interface loads:
-
-```julia
-using JuMP, Gurobi
-println("JuMP and Gurobi.jl loaded successfully.")
-```
-
-The mathematical-programming scripts will not solve without a valid Gurobi
-license.
-
-## MATLAB workflows
-
-The MATLAB scripts were retained in their original research form. Several
-contain case-specific filenames or relative paths such as `RAW_DATA/...`.
-Before running a script, set its file path to the applicable file under
-`data/DICOM_FILES/` or `data/RAW DATA /`, or run it from a working directory
-for which its relative paths resolve correctly.
-
-Add the repository scripts to the MATLAB path:
-
-```matlab
-repository_root = "/path/to/2024.0979.1";
-addpath(genpath(fullfile(repository_root, "scripts")));
-```
-
-### Read DICOM structures
-
-`scripts/DICOM_files_reader/read_structures.m` reads an RT structure set,
-iterates through ROI contour sequences, and plots contour coordinates in
-three dimensions.
-
-1. In the script, set the `dicominfo(...)` filename to a selected structure
-   set under `data/DICOM_FILES/`.
-2. Run:
-
-   ```matlab
-   run("scripts/DICOM_files_reader/read_structures.m")
-   ```
-
-### Read or inspect needles
-
-`scripts/DICOM_files_reader/read_needles.m` contains an example set of needle
-endpoints and creates 0.1 cm-spaced dwell positions along each needle. It
-writes these files to the MATLAB current folder:
-
-- `start_point_directions_on_needles.csv`;
-- `end_point_directions_on_needles.csv`;
-- `middle_point_directions_on_needles.csv`; and
-- `needle_number.csv`.
-
-For an RT plan, `scripts/Dose_calculation_codes/dwell_position_creation.m`
-uses `dicominfo` to read channels and brachytherapy control points from the
-configured needle-plan DICOM file, estimates the channel direction, and
-derives source endpoints.
-
-### Work with body structures and voxels
-
-`scripts/Body_organs_redear_codes/` contains the MATLAB helpers used to
-extract, visualize, and voxelize RT structure contours:
+`scripts/Body_organs_redear_codes/` contains MATLAB helper functions for
+contour extraction, visualization, and voxelization:
 
 | File | Role |
 | --- | --- |
-| `BrachyBasicInfo.m` | Reads basic RT-structure-set metadata, ROI counts, colors, bounds, and slice information. |
-| `BrachyGetSlice.m` | Retrieves the coordinates for an individual contour slice. |
-| `BrachyPlotContourSlice.m` | Plots selected contour regions on a slice. |
-| `BrachyPlotContourVolume.m` | Plots selected contours as a three-dimensional volume. |
-| `BrachyPlotVoxelizedSlice.m` | Plots voxelized regions on a slice. |
-| `BrachyPlotVoxelizedVolume.m` | Plots voxelized regions in three dimensions. |
-| `BrachyVoxelizeNew.m` | Runs the voxelization workflow. |
-| `BrachyVoxelizeSlice.m` | Voxelizes a single structure contour slice. |
+| `BrachyBasicInfo.m` | Obtains RT-structure-set metadata, region counts, colors, bounds, and slice information. |
+| `BrachyGetSlice.m` | Retrieves coordinates for an individual contour slice. |
+| `BrachyPlotContourSlice.m` | Visualizes selected contour regions on a slice. |
+| `BrachyPlotContourVolume.m` | Visualizes selected contours as a three-dimensional volume. |
+| `BrachyPlotVoxelizedSlice.m` | Visualizes voxelized regions on a slice. |
+| `BrachyPlotVoxelizedVolume.m` | Visualizes voxelized regions in three dimensions. |
+| `BrachyVoxelizeNew.m` | Contains the voxelization workflow. |
+| `BrachyVoxelizeSlice.m` | Voxelizes a single structure-contour slice. |
 
-These functions depend on variables and geometry derived from the DICOM
-structure-set workflow, so run them after loading the appropriate case data.
+Replace the sample DICOM and geometry data used by these helpers with data
+for the desired case.
 
-### Generate a dwell-point polyhedron
+### Polyhedron construction
 
-`scripts/Polyhydron_generation/polyhydrons_of_structures.m` reads selected
-dwell points, computes their convex hull, derives plane equations using
-symbolic variables, and plots the resulting polyhedron. Configure its
-`filename` variable to:
+`scripts/Polyhydron_generation/polyhydrons_of_structures.m` constructs a
+convex polyhedron from selected dwell points, computes the convex hull, and
+derives plane normals and offsets using symbolic equations. Replace the
+sample `Selected_dwell_points.xlsx` file with the selected dwell-point
+workbook for the desired case.
 
-```text
-data/RAW DATA /Selected_dwell_points.xlsx
-```
+### Dose calculations
 
-before running it.
+| Script | Source representation | Sample inputs to replace |
+| --- | --- | --- |
+| `linear_dose_computation.m` | Finite line source | Body voxels and source start/end points. |
+| `point_source_dose_calculatio.m` | Point source | Body voxels and selected dwell points. |
 
-### Calculate dose
+The two scripts contain local dose-computation definitions. Replace every
+sample coordinate file used by the selected dose model with compatible data
+from the desired case.
 
-| Script | Source model | Required primary inputs | Generated output |
-| --- | --- | --- | --- |
-| `linear_dose_computation.m` | Finite line source | `body_voxels.xlsx`, source start points, source end points | `dose_received_by_voxels.csv` |
-| `point_source_dose_calculatio.m` | Point source | `body_voxels.xlsx`, `Selected_dwell_points.xlsx` | `dose_received_by_voxels_point_source.csv` |
-
-Both scripts define a local `Dose_Computation` function and write results to
-their current MATLAB directory. Configure their `RAW_DATA/...` filenames to
-the corresponding paths in `data/RAW DATA /` before execution.
-
-## Julia optimization workflows
-
-Run each Julia workflow from its own method directory. This is important
-because the scripts resolve their `data/` and `output/` locations relative to
-that directory.
+## Julia optimization components
 
 ### Fixed-needle method
 
-Directory:
-
-```text
-scripts/Math_Methods/fixed_needle_method/
-```
-
-Run:
-
-```bash
-julia fixed_needle_method.jl
-```
-
-The model selects needles and dwell times subject to dose constraints,
+`scripts/Math_Methods/fixed_needle_method/` defines a mixed-integer model
+that selects needles and dwell times subject to dose constraints,
 incompatibility constraints, dwell-time limits, and a maximum needle count.
-Edit `fixed_needle_parameters.jl` when replacing its data. Outputs are:
 
-- `output/dwell_times.csv`
-- `output/selected_needle_indices.csv`
+Replace the sample files in its `data/` directory and revise
+`fixed_needle_parameters.jl` so the needle count, voxel ranges, dose bounds,
+penalty weights, dwell-time limit, and selection limit match the desired
+case.
 
 See
 [`scripts/Math_Methods/fixed_needle_method/README.md`](scripts/Math_Methods/fixed_needle_method/README.md)
-for input-shape requirements.
+for its detailed data format.
 
 ### Free-needle phase 1
 
-Directory:
+`scripts/Math_Methods/free needle phase 1/` contains the first free-needle
+phase, which optimizes dwell times from a dose matrix and identifies
+candidate dwell positions.
 
-```text
-scripts/Math_Methods/free needle phase 1/
-```
-
-Run:
-
-```bash
-julia free_needle_phase_1.jl
-```
-
-This phase optimizes dwell times from its dose matrix and retains the
-largest-dwell-time candidate positions for later phases. Edit
-`free_needle_phase_1_parameters.jl` for voxel ranges, dose bounds, penalty
-weights, maximum dwell time, and the number of retained candidates. Outputs
-are:
-
-- `output/dwell_times.csv`
-- `output/candidate_dwell_positions.csv`
+Replace `data/dose_matrix.csv` with the desired voxel-by-dwell-position
+dose-rate matrix. Revise `free_needle_phase_1_parameters.jl` so its voxel
+ranges, dose bounds, penalty weights, dwell-time limit, and candidate count
+match the replacement data.
 
 See
 [`scripts/Math_Methods/free needle phase 1/README-free-needle-phase-1.md`](scripts/Math_Methods/free%20needle%20phase%201/README-free-needle-phase-1.md)
-for details.
+for its detailed data format.
 
-### Maximum coverage method
+### Maximum-coverage method
 
-Directory:
+`scripts/Math_Methods/Maximum Coverage method/` defines a model for selecting
+candidate needles using coverage weights and candidate-needle intersection
+constraints.
 
-```text
-scripts/Math_Methods/Maximum Coverage method/
-```
-
-Run:
-
-```bash
-julia maximum_coverage_method.jl
-```
-
-The model selects at most `MAX_SELECTED_NEEDLES` candidate needles using
-coverage weights and candidate-needle intersection constraints. Update
-`maximum_coverage_parameters.jl` and replace the files in `data/` for a new
-case. Results are written to `output/`.
+Replace the three sample coverage and intersection matrices in its `data/`
+directory with matrices for the desired candidate-needle set. Revise
+`maximum_coverage_parameters.jl` to match the replacement data.
 
 See
 [`scripts/Math_Methods/Maximum Coverage method/README.md`](scripts/Math_Methods/Maximum%20Coverage%20method/README.md)
@@ -349,45 +236,33 @@ for the coverage-matrix definition.
 
 ## Constrained line-clustering variants
 
-The clustering models are in:
+The clustering formulations are in:
 
 ```text
 scripts/Math_Methods/kmeans_clustering_method_variants/
 ```
 
-Every variant is self-contained and includes:
+Each variant contains `run_clustering.jl`, `line_fitter.jl`,
+`problem_data.jl`, `parameters.jl`, and a `data/` directory with sample
+three-dimensional points and constraint data. Replace every sample CSV in
+the selected variant's `data/` directory and revise `parameters.jl` for the
+desired geometry.
 
-- `run_clustering.jl` — entry point;
-- `line_fitter.jl` — the model-specific fitting formulation;
-- `problem_data.jl` — input loading and shared geometric data;
-- `parameters.jl` — model parameters;
-- `data/` — point and constraint CSV inputs; and
-- `output/` — generated results.
+| Folder | Line representation | Formulation |
+| --- | --- | --- |
+| `infinite_line_nonconvex_qcqp` | Infinite line | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_fixed_bounds` | Finite segment with fixed bounds | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_fixed_parameter_bounds` | Finite segment with fixed parameter bounds | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_variable_bounds` | Finite segment with variable lower and upper bounds | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_lower_bound` | Finite segment with a determined lower bound and fixed upper bound | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_two_sided_bounds` | Finite segment with determined lower and upper bounds | Nonconvex QCQP |
+| `finite_segment_nonconvex_qcqp_two_sided_bounds_minimum_length` | Finite segment with two-sided bounds and a minimum length | Nonconvex QCQP |
+| `infinite_line_nonconvex_qcqp_alternating_refinement` | Infinite line with alternating refinement | Nonconvex QCQP |
+| `infinite_line_nonconvex_qcqp_quadratic_cone_refinement` | Infinite line with quadratic-cone refinement | Nonconvex QCQP |
 
-Run any variant from its own directory:
-
-```bash
-julia run_clustering.jl
-```
-
-
-## Results
-
-The repository includes tracked manuscript figures under `results/figures/`:
-
-- body-structure and clinical-needle visualizations for the ear case and both
-  nasal cases;
-- fixed-needle and free-needle configuration figures;
-- dose-volume histogram figures for clinical, fixed-needle, maximum-coverage,
-  and clustering-approach solutions;
-- five clustering-variant configuration figures; and
-- combined all-case plots.
-
-`results/tables/` contains figures summarizing dose metrics across clustering
-models and solution times for each model.
-
-
-
+See
+[`scripts/Math_Methods/kmeans_clustering_method_variants/README.md`](scripts/Math_Methods/kmeans_clustering_method_variants/README.md)
+for the variant directory structure.
 
 ## Authors
 
@@ -404,6 +279,5 @@ models and solution times for each model.
 
 The source code is distributed under the MIT License. See `LICENSE`.
 
-The DICOM data and external software dependencies, including MATLAB and
-Gurobi, remain subject to their own licenses, governance, and use
-requirements.
+The DICOM examples and external dependencies remain subject to their own
+licenses, governance, and use requirements.
