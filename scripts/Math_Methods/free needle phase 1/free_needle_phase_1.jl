@@ -1,8 +1,4 @@
-using CSV
-using DataFrames
-using DelimitedFiles
-using Gurobi
-using JuMP
+include(joinpath(@__DIR__, "..", "package_loading.jl"))
 
 include("free_needle_phase_1_parameters.jl")
 

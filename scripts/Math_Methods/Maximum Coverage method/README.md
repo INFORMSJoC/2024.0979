@@ -7,7 +7,7 @@ To run this code for any desired case:
 3. Run:
 
    ```bash
-   julia --project=. maximum_coverage_method.jl
+   julia maximum_coverage_method.jl
    ```
 
 The output files are written to the `output` folder.
@@ -15,3 +15,12 @@ The output files are written to the `output` folder.
 `candidate_needle_coverage.csv` is the candidate-needle-by-dwell-position binary
 coverage matrix. It is used by constraint (7b), which permits at most one selected
 candidate needle to cover each dwell position.
+
+Before the first run, install the required Julia packages globally:
+
+```julia
+using Pkg
+Pkg.add(["CSV", "DataFrames", "JuMP", "Gurobi"])
+```
+
+Then run the model command shown above from its model folder.
