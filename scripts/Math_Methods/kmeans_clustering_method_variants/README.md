@@ -1,6 +1,6 @@
 # K-means Line Models by Formulation
 
-Each subfolder is independent. It has its own `Project.toml`, `Manifest.toml`,
+Each subfolder is independent. It has its own
 `data/`, `output/`, `problem_data.jl`, `line_fitter.jl`, and
 `run_clustering.jl`. Run a model from its own folder:
 
@@ -20,10 +20,3 @@ julia run_clustering.jl
 | `infinite_line_nonconvex_qcqp_quadratic_cone_refinement` | Infinite line with quadratic-cone refinement | Nonconvex QCQP |
 | `finite_segment_nonconvex_qcqp_fixed_parameter_bounds` | Finite segment with fixed parameter bounds | Nonconvex QCQP |
 
-All models use globally installed Julia packages through `package_loading.jl`.
-Before the first run, install them once:
-
-```julia
-using Pkg
-Pkg.add(["JuMP", "Gurobi"])
-```
