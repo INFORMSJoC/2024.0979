@@ -1,11 +1,44 @@
-# Optimization Models for Needle Placement in 3D-Printed HDR-BT Masks
+[![INFORMS Journal on Computing Logo](https://INFORMSJoC.github.io/logos/INFORMS_Journal_on_Computing_Header.jpg)](https://pubsonline.informs.org/journal/ijoc)
 
-This repository contains the research code, anonymized DICOM-RT examples,
-optimization-model inputs, and result figures supporting:
+# Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy
 
-> Mirzavand Boroujeni, N., Richard, J.-P. P., Sterling, D., and Wilke, C.
-> *Optimization models for needle placement in 3D-printed masks for
-> high-dose-rate brachytherapy.*
+This archive is distributed under the [MIT License](LICENSE).
+
+The software, data documentation, and experiment materials in this repository
+are a snapshot associated with the paper [*Optimization models for needle
+placement in 3D-printed masks for high-dose-rate brachytherapy*](https://arxiv.org/abs/2503.06000)
+by Nasim Mirzavand Boroujeni, Jean-Philippe Richard, David Sterling, and
+Christopher T. Wilke.
+
+## Cite
+
+To cite the contents of this repository, cite the associated paper and this
+software repository:
+
+- Paper: <https://arxiv.org/abs/2503.06000>
+- Repository: <https://github.com/Nasim1373/2024.0979.1>
+
+Use the following BibTeX entries:
+
+```bibtex
+@misc{MirzavandBoroujeniEtAl2025,
+  author        = {Nasim Mirzavand Boroujeni and Jean-Philippe Richard and David Sterling and Christopher T. Wilke},
+  title         = {{Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy}},
+  year          = {2025},
+  eprint        = {2503.06000},
+  archiveprefix = {arXiv},
+  url           = {https://arxiv.org/abs/2503.06000}
+}
+
+@misc{MirzavandBoroujeniEtAlRepository,
+  author = {Nasim Mirzavand Boroujeni and Jean-Philippe Richard and David Sterling and Christopher T. Wilke},
+  title  = {{Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy: Code Repository}},
+  url    = {https://github.com/Nasim1373/2024.0979.1},
+  note   = {Research code and reproducibility materials}
+}
+```
+
+## Description
 
 The research considers placement of straight treatment channels in
 patient-specific, 3D-printed surface masks for high-dose-rate brachytherapy
