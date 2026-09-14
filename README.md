@@ -126,9 +126,9 @@ treatment-planning software**. Do not use it for patient care.
 | `data/RAW DATA /` | Sample voxel, dwell-point, and source-endpoint data. |
 | `data/README.md` | DICOM data description, anonymization, governance, and source attribution. |
 | `scripts/DICOM_files_reader/` | DICOM-RT structure and needle scripts. |
-| `scripts/Body_organs_redear_codes/` | Contour, slice, volume, and voxelization helpers. |
+| `scripts/Body_Organs_Redear_Codes/` | Body-structure contour, slice, volume, and voxelization helpers. |
 | `scripts/Polyhydron_generation/` | Convex-polyhedron construction from dwell points. |
-| `scripts/Dose_calculation_codes/` | Dwell-position and dose-calculation scripts. |
+| `scripts/Dose_Calculation_Codes/` and `scripts/Dose_calculation_codes/` | Dose-calculation and dwell-position scripts. |
 | `scripts/Math_Methods/` | Optimization formulations and constrained clustering variants. |
 | `AUTHORS` | Project authors and contact information. |
 | `LICENSE` | MIT License text. |
@@ -215,7 +215,7 @@ case.
 
 ### Body-structure and voxel helpers
 
-`scripts/Body_organs_redear_codes/` contains MATLAB helper functions for
+`scripts/Body_Organs_Redear_Codes/` contains MATLAB helper functions for
 contour extraction, visualization, and voxelization:
 
 | File | Role |
@@ -244,8 +244,8 @@ workbook for the desired case.
 
 | Script | Source representation | Sample inputs to replace |
 | --- | --- | --- |
-| `linear_dose_computation.m` | Finite line source | Body voxels and source start/end points. |
-| `point_source_dose_calculatio.m` | Point source | Body voxels and selected dwell points. |
+| `scripts/Dose_Calculation_Codes/linear_dose_computation.m` | Finite line source | Body voxels and source start/end points. |
+| `scripts/Dose_Calculation_Codes/point_source_dose_calculatio.m` | Point source | Body voxels and selected dwell points. |
 
 The two scripts contain local dose-computation definitions. Replace every
 sample coordinate file used by the selected dose model with compatible data
