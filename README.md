@@ -38,6 +38,69 @@ Use the following BibTeX entries:
 }
 ```
 
+## Software installation
+
+### MATLAB
+
+Install a current desktop MATLAB release from
+<https://www.mathworks.com/downloads/>:
+
+1. Download and open the installer for your operating system.
+2. Sign in with the MathWorks account associated with your license.
+3. Install **MATLAB** and ensure that DICOM support is available.
+4. Install the **Symbolic Math Toolbox** for the polyhedron-construction
+   script.
+
+Confirm the MATLAB installation and required functions from the MATLAB Command
+Window:
+
+```matlab
+ver
+which dicominfo
+which syms
+```
+
+The MATLAB code uses `dicominfo`, `xlsread`, `xlswrite`, `csvread`, and
+`csvwrite`. Some current MATLAB releases may display compatibility warnings
+for the legacy Excel and CSV functions.
+
+### Julia and Gurobi
+
+The Julia optimization models require Julia, Gurobi, a valid Gurobi license,
+and the Julia packages `CSV`, `DataFrames`, `DelimitedFiles`, `Gurobi`,
+`JuMP`, `LinearAlgebra`, and `Random`.
+
+1. Install Julia from <https://julialang.org/downloads/>.
+2. Install Gurobi from <https://www.gurobi.com/downloads/>.
+3. Request and activate a **full academic Gurobi license** through
+   <https://www.gurobi.com/academia/academic-program-and-licenses/>. The
+   large-scale models in this repository may exceed the limits of restricted
+   or size-limited licenses.
+4. In a Julia session, install the required packages:
+
+   ```julia
+   using Pkg
+   Pkg.add([
+       "CSV",
+       "DataFrames",
+       "DelimitedFiles",
+       "Gurobi",
+       "JuMP",
+       "LinearAlgebra",
+       "Random",
+   ])
+   ```
+
+5. Confirm that Julia can access the solver interface:
+
+   ```julia
+   using JuMP, Gurobi
+   println("JuMP and Gurobi.jl loaded successfully.")
+   ```
+
+The Julia mathematical-programming models cannot solve without a valid Gurobi
+license. Use a full academic license when solving the large-scale models.
+
 ## Description
 
 This repository contains research implementations for placing straight
