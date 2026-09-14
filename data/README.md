@@ -30,6 +30,8 @@ Facial anatomy outside the tumor and non-tumor regions are removed, subject to c
 ## DICOM file content sample
 
 
+The provided samples illustrate common data fields; individual DICOM files may contain additional fields or different available data.
+
 ### RT Structure Set fields
 
 | Field | Meaning / use |
