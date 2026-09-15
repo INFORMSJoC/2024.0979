@@ -2,39 +2,35 @@
 
 # Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy
 
-This archive is distributed under the [MIT License](LICENSE).
+This archive is distributed in association with the [INFORMS Journal on Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+
 
 The software, data documentation, and experiment materials in this repository
-are a snapshot associated with the paper [*Optimization models for needle
-placement in 3D-printed masks for high-dose-rate brachytherapy*](https://arxiv.org/abs/2503.06000)
+are a snapshot associated with the paper [*Optimization Models for Needle
+Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy*](https://pubsonline.informs.org/doi/10.1287/ijoc.2024.0979)
 by Nasim Mirzavand Boroujeni, Jean-Philippe Richard, David Sterling, and
 Christopher T. Wilke.
 
 ## Cite
 
-To cite the contents of this repository, cite the associated paper and this
-software repository:
+To cite the contents of this repository, please cite both the paper and this repo,
+using their respective DOIs.
 
-- Paper: <https://arxiv.org/abs/2503.06000>
-- Repository: <https://github.com/Nasim1373/2024.0979.1>
+[https://doi.org/10.1287/ijoc.2024.0979](https://doi.org/10.1287/ijoc.2024.0979)
 
-Use the following BibTeX entries:
+[https://doi.org/10.1287/ijoc.2024.0979.cd](https://doi.org/10.1287/ijoc.2024.0979.cd)
+
+Below is the BibTeX for citing this snapshot of the repository.
 
 ```bibtex
-@misc{MirzavandBoroujeniEtAl2025,
-  author        = {Nasim Mirzavand Boroujeni and Jean-Philippe Richard and David Sterling and Christopher T. Wilke},
-  title         = {{Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy}},
-  year          = {2025},
-  eprint        = {2503.06000},
-  archiveprefix = {arXiv},
-  url           = {https://arxiv.org/abs/2503.06000}
-}
-
-@misc{MirzavandBoroujeniEtAlRepository,
-  author = {Nasim Mirzavand Boroujeni and Jean-Philippe Richard and David Sterling and Christopher T. Wilke},
-  title  = {{Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy: Code Repository}},
-  url    = {https://github.com/Nasim1373/2024.0979.1},
-  note   = {Research code and reproducibility materials}
+@article{MirzavandBoroujeni2026,
+  author    = {Nasim Mirzavand Boroujeni and Jean-Philippe Richard and David Sterling and Christopher T. Wilke},
+  publisher = {INFORMS Journal on Computing},
+  title     = {{Optimization Models for Needle Placement in 3D-Printed Masks for High-Dose-Rate Brachytherapy}},
+  year      = {2026},
+  doi       = {10.1287/ijoc.2024.0979.cd},
+  url       = {https://github.com/INFORMSJoC/2024.0979},
+  note      = {Available for download at https://github.com/INFORMSJoC/2024.0979},
 }
 ```
 
