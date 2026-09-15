@@ -1,0 +1,22 @@
+const DATA_DIRECTORY = joinpath(@__DIR__, "data")
+const OUTPUT_DIRECTORY = joinpath(@__DIR__, "output")
+const DOSE_RATE_FILE = joinpath(DATA_DIRECTORY, "dose_matrix.csv")
+const INCOMPATIBILITY_MATRIX_FILE = joinpath(DATA_DIRECTORY, "incompatible_needles.csv")
+const DWELL_TO_NEEDLE_FILE = joinpath(DATA_DIRECTORY, "dwell_to_needle.csv")
+
+const NEEDLE_COUNT = 97
+const TUMOR_VOXEL_START = 1
+const TUMOR_VOXEL_END = 2129
+const ORGAN_VOXEL_START = 2130
+const ORGAN_VOXEL_END = 3670
+
+const TUMOR_LOWER_DOSE = 6.0
+const TUMOR_UPPER_DOSE = 9.0
+const ORGAN_UPPER_DOSE = 2.0
+const TUMOR_UNDERDOSE_PENALTY = 5000.0
+const TUMOR_OVERDOSE_PENALTY = 5000.0
+const ORGAN_OVERDOSE_PENALTY = 1500.0
+
+const MAX_DWELL_TIME = 10.0
+const MAX_SELECTED_NEEDLES = 6
+const SOLVER_TIME_LIMIT_SECONDS = 236.33
